@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "jember_frontend_task"]
+	url = https://github.com/hansellb/jember_frontend_task.git
+	fetch = +refs/heads/*:refs/remotes/jember_frontend_task/*
+[remote "origin"]
+	url = https://github.com/hansellb/jember_frontend_task.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
