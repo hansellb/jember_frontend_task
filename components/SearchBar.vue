@@ -3,7 +3,7 @@
     <b-input-group class="mt-3">
       <b-input-group-prepend>
         <b-button
-          @click="inputText = '';"
+          @click="inputText = ''; processInput()"
           variant="danger"
         >
           X
