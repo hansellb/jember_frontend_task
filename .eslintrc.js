@@ -13,5 +13,9 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    "no-trailing-spaces": ["error", { "skipBlankLines": false, "ignoreComments": false }],
+    "indent": "warn",
+    "semi": "warn",
+    "prefer-const": "warn"
   }
 }
