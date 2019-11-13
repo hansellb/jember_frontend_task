@@ -1,30 +1,79 @@
 <template>
   <div>
-    Reset / empty movie list
-    Search Bar
-    Search Results
-    List of movies
+    <div>
+      <b-button
+        id="resetListBtn"
+        @click="fetchMovies()"
+        variant="primary"
+      >
+        Reset list
+      </b-button>
+      <b-alert
+        :show="dismissCountDown"
+        @dismiss-count-down="countDownChanged"
+        dismissible
+        fade
+        class="float-right"
+        variant="danger"
+      >
+        {{ alertMessage }}
+      </b-alert>
+      <b-popover
+        target="resetListBtn"
+        triggers="hover"
+      >
+        Removes all movies from the list and adds 5 new movies. Note: The new list could the same ;-)
+      </b-popover>
+
+      <SearchBar
+        @searchInputAvailable="searchMovies"
+        @resultSelected="addMovie"
+        :searchResults="searchResults"
+      />
+    </div>
+
+    <b-alert
+      :show="isListEmpty"
+      dismissible
+      fade
+      variant="danger"
+    >
+      The movie list is empty :-(
+    </b-alert>
+    <ItemList
+      :list="movies"
+      :listFilter="movieListFilter"
+      @removeItem="removeMovie"
+      :type="'cards'"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import config from '~/nuxt.config.js'
 
-const env = config.env
+import ItemList from '~/components/ItemList'
+import SearchBar from '~/components/SearchBar'
 
 export default {
+  components: {
+    ItemList, SearchBar
+  },
+
   data () {
     return {
-      imageSizes: [],
-      movies: []
+      movies: [],
+      movieListFilter: '',
+      searchResults: [],
+      alertMessage: '',
+      alertTimeout: 3,
+      dismissCountDown: 0
     }
   },
 
-  created () {
-    env.apiHeaders = { 'Authorization': 'Bearer ' + env.apiToken }
-    if (env.apiImagesUrl === '' && env.imageSizes.length === 0) {
-      this.getApiConfig()
+  computed: {
+    isListEmpty () {
+      return this.movies.length === 0
     }
   },
 
@@ -55,8 +104,8 @@ export default {
       // Make the API call to TheMovieDB.org to get movies containing the word "the"
       axios({
         method: 'get',
-        url: env.apiUrl + env.apiVersion + '/search/movie?query="the"&primary_release_year=' + year,
-        headers: env.apiHeaders
+        url: process.env.apiUrl + process.env.apiVersion + '/search/movie?query="the"&primary_release_year=' + year,
+        headers: process.env.apiHeaders
       }).then((response) => {
         const initialMovies = []
 
@@ -74,7 +123,7 @@ export default {
               id: movie.id,
               title: movie.title,
               year: movie.release_date,
-              img_url: env.apiImagesUrl + env.imageSizes[1] + movie.poster_path,
+              img_url: process.env.apiImagesUrl + process.env.imageSizes[1] + movie.poster_path,
               description: movie.overview
             })
           }
@@ -83,6 +132,25 @@ export default {
         // Save the movie list in the browser's sessionStorage so it is not lost when refreshing the page
         sessionStorage.setItem('movies', JSON.stringify(initialMovies))
         this.movies = initialMovies
+      })
+    },
+
+    /**
+     * Search movies by title using themoviedb's API
+     */
+    searchMovies (title) {
+      this.movieListFilter = title
+
+      if (title.length < 3) {
+        return
+      }
+
+      axios({
+        method: 'get',
+        url: process.env.apiUrl + process.env.apiVersion + '/search/movie?query="' + title + '"',
+        headers: process.env.apiHeaders
+      }).then((response) => {
+        this.searchResults = response.data.results
       })
     },
 
@@ -103,7 +171,7 @@ export default {
         id: movie.id,
         title: movie.title,
         year: movie.release_date,
-        img_url: env.apiImagesUrl + env.imageSizes[1] + movie.poster_path,
+        img_url: process.env.apiImagesUrl + process.env.imageSizes[1] + movie.poster_path,
         description: movie.overview
       })
 
@@ -133,8 +201,19 @@ export default {
 
       // Save the modified list in the browser
       sessionStorage.setItem('movies', JSON.stringify(this.movies))
+    },
+
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    },
+
+    showAlert (message, timeout) {
+      this.alertMessage = message
+      this.dismissCountDown = timeout
     }
+
   }
+
 }
 
 </script>

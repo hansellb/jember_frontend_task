@@ -13,9 +13,15 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "no-trailing-spaces": ["error", { "skipBlankLines": false, "ignoreComments": false }],
+    "no-trailing-spaces": ["warn", { "skipBlankLines": false, "ignoreComments": false }],
+    "key-spacing": "warn",
     "indent": "warn",
     "semi": "warn",
-    "prefer-const": "warn"
+    "prefer-const": "warn",
+    "comma-dangle": "warn",
+    "eol-last": "warn",
+    "space-before-function-paren": "warn",
+    "vue/max-attributes-per-line": "warn",
+    "vue/no-unused-components": "warn"
   }
 }
