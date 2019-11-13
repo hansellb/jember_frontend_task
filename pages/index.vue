@@ -1,12 +1,14 @@
 <template>
-  <div>
-    Index Page
-  </div>
+  <Jumbotron />
 </template>
 
 <script>
-export default {
+import Jumbotron from '~/components/Jumbotron.vue'
 
+export default {
+  components: {
+    Jumbotron
+  }
 }
 </script>
 
