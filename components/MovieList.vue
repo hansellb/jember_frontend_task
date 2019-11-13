@@ -10,11 +10,11 @@
       </b-button>
       <b-alert
         :show="dismissCountDown"
+        :variant="alertType"
         @dismiss-count-down="countDownChanged"
         dismissible
         fade
         class="float-right"
-        variant="danger"
       >
         {{ alertMessage }}
       </b-alert>
@@ -65,6 +65,7 @@ export default {
       movies: [],
       movieListFilter: '',
       searchResults: [],
+      alertType: 'danger',
       alertMessage: '',
       alertTimeout: 3,
       dismissCountDown: 0
@@ -163,7 +164,7 @@ export default {
       })
 
       if (movieAlreadyInList !== undefined) {
-        this.showAlert(movieAlreadyInList.title + ' is already in the list!!!', 3)
+        this.showAlert('warning', movieAlreadyInList.title + ' is already in the list!!!', 3)
         return
       }
 
@@ -177,6 +178,7 @@ export default {
 
       // Save the modified list in the browser
       sessionStorage.setItem('movies', JSON.stringify(this.movies))
+      this.showAlert('success', movieAlreadyInList.title + ' was added to the List', 5)
     },
 
     /**
@@ -193,7 +195,7 @@ export default {
       })
 
       if (movieAlreadyInList === undefined) {
-        this.showAlert(movieAlreadyInList.title + ' was not found in the List', 5)
+        this.showAlert('danger', movieAlreadyInList.title + ' was not found in the List', 5)
         return
       }
 
@@ -207,7 +209,8 @@ export default {
       this.dismissCountDown = dismissCountDown
     },
 
-    showAlert (message, timeout) {
+    showAlert (type, message, timeout) {
+      this.alertType = type
       this.alertMessage = message
       this.dismissCountDown = timeout
     }
