@@ -178,7 +178,7 @@ export default {
 
       // Save the modified list in the browser
       sessionStorage.setItem('movies', JSON.stringify(this.movies))
-      this.showAlert('success', movieAlreadyInList.title + ' was added to the List', 5)
+      this.showAlert('success', movie.title + ' was added to the List', 5)
     },
 
     /**
