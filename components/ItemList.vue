@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="type == 'cards'"
+      v-if="type === 'cards'"
       class="mt-5 d-flex flex-wrap"
     >
       <b-card
@@ -58,6 +58,8 @@
 
 <script>
 export default {
+  name: 'ItemList',
+
   props: {
     list: {
       type: Array,
