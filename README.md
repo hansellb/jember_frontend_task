@@ -1,6 +1,6 @@
-# movielist
+# Movie List
 
-> Jember&#39;s front-end task for job interview
+> [Jember](https://www.jember.de/)&#39;s front-end task
 
 ## Build Setup
 
@@ -18,5 +18,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
