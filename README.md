@@ -1,6 +1,7 @@
 # Movie List
+A variation of a **To Do** list that manages a list of movies. The app features [Nuxt.js](https://nuxtjs.org/) / [Vue.js](https://vuejs.org/), and the [API](https://developers.themoviedb.org/) from [The MovieDB](https://www.themoviedb.org/)
 
-> App using Nuxt.js / Vue.js as the front-end framework (Using Jest for tests) that manages a movie list (a variation of a ToDo list)
+The app was created with [`yarn create nuxt-app`](https://github.com/nuxt/create-nuxt-app) and it uses [bootstrap-vue](https://bootstrap-vue.js.org/), [Jest](https://jestjs.io/), and [electron](https://electronjs.org/)
 
 ## Build Setup
 

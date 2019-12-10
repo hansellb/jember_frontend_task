@@ -1,7 +1,7 @@
 {
   "name": "movielist",
   "version": "1.0.0",
-  "description": "Jember&#39;s front-end task for job interview",
+  "description": "Nuxt.js app created with yarn create nuxt-app",
   "author": "Hansell Baran",
   "private": true,
   "scripts": {
