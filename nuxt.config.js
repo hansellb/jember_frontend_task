@@ -48,8 +48,12 @@ export default {
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
+  ** default baseURL: 'http://[HOST]:[PORT][PREFIX]', env variable API_URL overrides baseURL
+  ** default prefix: '/'
   */
   axios: {
+    baseURL: 'https://api.themoviedb.org/3/',
+    headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDg1M2QwYWEwYTQ3N2NiZmE4NmI4NDdkZjQ1OGFjZiIsInN1YiI6IjU5MjIxZjc5YzNhMzY4Nzk5YjA1Y2E3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ndlfHbYsa5o4aeIXo9ttQVBXFXtvvuOGTgCYTx0UUCM' }
   },
   /*
   ** Build configuration
@@ -65,11 +69,7 @@ export default {
   ** Environment configuration
   */
   env: {
-    apiUrl: 'https://api.themoviedb.org/',
-    apiVersion: 3,
-    apiToken: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDg1M2QwYWEwYTQ3N2NiZmE4NmI4NDdkZjQ1OGFjZiIsInN1YiI6IjU5MjIxZjc5YzNhMzY4Nzk5YjA1Y2E3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ndlfHbYsa5o4aeIXo9ttQVBXFXtvvuOGTgCYTx0UUCM',
-    apiImagesUrl: 'http://image.tmdb.org/t/p/',
-    imageSizes: ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original'],
-    apiHeaders: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDg1M2QwYWEwYTQ3N2NiZmE4NmI4NDdkZjQ1OGFjZiIsInN1YiI6IjU5MjIxZjc5YzNhMzY4Nzk5YjA1Y2E3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ndlfHbYsa5o4aeIXo9ttQVBXFXtvvuOGTgCYTx0UUCM' }
+    API_IMAGES_URL: 'http://image.tmdb.org/t/p/',
+    IMAGE_SIZES: ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original']
   }
 }

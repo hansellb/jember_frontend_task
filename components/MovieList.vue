@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios' // If Nuxt.js is configured with axios module, then that module is available with `this.$axios`
 
 import ItemList from '~/components/ItemList'
 import SearchBar from '~/components/SearchBar'
@@ -68,7 +68,8 @@ export default {
       alertType: 'danger',
       alertMessage: '',
       alertTimeout: 3,
-      dismissCountDown: 0
+      dismissCountDown: 0,
+      movieImageSize: 1
     }
   },
 
@@ -103,10 +104,9 @@ export default {
       const year = Math.floor((Math.random() * (range)) + min)
 
       // Make the API call to TheMovieDB.org to get movies containing the word "the"
-      axios({
+      this.$axios({
         method: 'get',
-        url: process.env.apiUrl + process.env.apiVersion + '/search/movie?query="the"&primary_release_year=' + year,
-        headers: process.env.apiHeaders
+        url: 'search/movie?query="the"&primary_release_year=' + year
       }).then((response) => {
         const initialMovies = []
 
@@ -124,7 +124,7 @@ export default {
               id: movie.id,
               title: movie.title,
               year: movie.release_date,
-              img_url: process.env.apiImagesUrl + process.env.imageSizes[1] + movie.poster_path,
+              img_url: process.env.API_IMAGES_URL + process.env.IMAGE_SIZES[this.movieImageSize] + movie.poster_path,
               description: movie.overview
             })
           }
@@ -146,10 +146,9 @@ export default {
         return
       }
 
-      axios({
+      this.$axios({
         method: 'get',
-        url: process.env.apiUrl + process.env.apiVersion + '/search/movie?query="' + title + '"',
-        headers: process.env.apiHeaders
+        url: 'search/movie?query="' + title + '"'
       }).then((response) => {
         this.searchResults = response.data.results
       })
@@ -172,7 +171,7 @@ export default {
         id: movie.id,
         title: movie.title,
         year: movie.release_date,
-        img_url: process.env.apiImagesUrl + process.env.imageSizes[1] + movie.poster_path,
+        img_url: process.env.API_IMAGES_URL + process.env.IMAGE_SIZES[this.movieImageSize] + movie.poster_path,
         description: movie.overview
       })
 
