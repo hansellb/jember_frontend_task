@@ -1,6 +1,6 @@
 # Movie List
 
-> [Jember](https://www.jember.de/)&#39;s front-end task
+> App using Nuxt.js / Vue.js as the front-end framework (Using Jest for tests) that manages a movie list (a variation of a ToDo list)
 
 ## Build Setup
 
